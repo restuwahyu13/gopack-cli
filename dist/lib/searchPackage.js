@@ -20,11 +20,13 @@ exports.default = (program) => {
             choice_1.default(inquirer_1.prompt, answer1, async (data1, response1) => {
                 if (data1.confirms === true) {
                     clear_1.default();
+                    console.log('response1 if', response1);
                     fileSystem_1.writeData('gopack.txt', response1);
                     question_1.default(inquirer_1.prompt, (answer2) => {
                         choice_1.default(inquirer_1.prompt, answer2, async (data2, response2) => {
                             if (data2.confirms === true) {
                                 clear_1.default();
+                                console.log('response2 if', response2);
                                 fileSystem_1.writeData('gopack.txt', response2);
                                 question_1.default(inquirer_1.prompt, (answer3) => {
                                     choice_1.default(inquirer_1.prompt, answer3, async (data3, response3) => {
@@ -191,6 +193,7 @@ exports.default = (program) => {
                                 });
                             }
                             else {
+                                console.log('response2 else', response2);
                                 fileSystem_1.writeData('gopack.txt', response2);
                                 gopack.checkGomod();
                                 gopack.checkGolangPackage();
@@ -199,6 +202,7 @@ exports.default = (program) => {
                     });
                 }
                 else {
+                    console.log('response1 else', response1);
                     fileSystem_1.writeData('gopack.txt', response1);
                     gopack.checkGomod();
                     gopack.checkGolangPackage();

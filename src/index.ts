@@ -13,7 +13,9 @@ export default class Gopack {
 	increment = 0
 	barProgress = undefined
 	handler = undefined
+	handlerLoading = undefined
 	spinner = undefined
+	percentage = 0
 
 	loadingSpinner(): void {
 		this.spinner = new Spinner('Processing... %s')
@@ -65,16 +67,24 @@ export default class Gopack {
 				clearInterval(this.handler)
 				this.barProgress.stop()
 				this.loadingSpinner()
+				setTimeout(() => this.installedGolangPackage(), 1000)
+			}
+		}, 100)
+
+		this.handlerLoading = setInterval(() => {
+			this.percentage += 1
+			if (this.percentage >= 200) {
+				clearInterval(this.handlerLoading)
+				this.loadingSpinner()
 				setTimeout(() => {
-					this.installedGolangPackage()
 					this.spinner.stop()
-				}, 1000)
-				setTimeout(() => clearScreen(), 1200)
+				}, 1400)
 				setTimeout(() => {
+					clearScreen()
 					consola.success(chalk.bold.white('Installed go package success'))
 					deleteData()
 					process.exit(0)
-				}, 1500)
+				}, 1600)
 			}
 		}, 100)
 	}

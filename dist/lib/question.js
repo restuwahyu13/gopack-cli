@@ -10,7 +10,7 @@ exports.default = (prompt, callback) => {
             validate: function (input) {
                 let done = this.async();
                 setTimeout(function () {
-                    const validate = /[a-zA-Z]/gi.test(input);
+                    const validate = /^[a-zA-Z]$/gi.test(input);
                     if (!validate) {
                         done('go package name must be string format');
                         return;
@@ -39,14 +39,10 @@ exports.default = (prompt, callback) => {
         let spinner = new cli_spinner_1.Spinner('Processing... %s');
         spinner.setSpinnerString('|/-\\');
         spinner.start();
-        const infiniteLoading = setInterval(() => {
-            if (answer)
-                clearInterval(infiniteLoading);
-            setTimeout(() => {
-                callback(answer);
-                spinner.stop();
-            }, 2000 + 100);
-        }, 100);
+        setTimeout(() => {
+            callback(answer);
+            spinner.stop();
+        }, 10000);
     });
 };
 //# sourceMappingURL=question.js.map

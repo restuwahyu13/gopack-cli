@@ -16,11 +16,13 @@ export default (program: Record<string, any>): void => {
 				choice(prompt, answer1, async (data1, response1) => {
 					if (data1.confirms === true) {
 						cleanup()
+						console.log('response1 if', response1)
 						writeData('gopack.txt', response1)
 						question(prompt, (answer2) => {
 							choice(prompt, answer2, async (data2, response2) => {
 								if (data2.confirms === true) {
 									cleanup()
+									console.log('response2 if', response2)
 									writeData('gopack.txt', response2)
 									question(prompt, (answer3) => {
 										choice(prompt, answer3, async (data3, response3) => {
@@ -174,6 +176,7 @@ export default (program: Record<string, any>): void => {
 										})
 									})
 								} else {
+									console.log('response2 else', response2)
 									writeData('gopack.txt', response2)
 									gopack.checkGomod()
 									gopack.checkGolangPackage()
@@ -181,6 +184,7 @@ export default (program: Record<string, any>): void => {
 							})
 						})
 					} else {
+						console.log('response1 else', response1)
 						writeData('gopack.txt', response1)
 						gopack.checkGomod()
 						gopack.checkGolangPackage()

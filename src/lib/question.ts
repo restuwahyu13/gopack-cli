@@ -9,7 +9,7 @@ export default (prompt: any, callback: any): void => {
 			validate: function (input: string) {
 				let done = this.async()
 				setTimeout(function () {
-					const validate = /[a-zA-Z]/gi.test(input)
+					const validate = /^[a-zA-Z]$/gi.test(input)
 					if (!validate) {
 						done('go package name must be string format')
 						return
@@ -38,12 +38,9 @@ export default (prompt: any, callback: any): void => {
 		let spinner = new Spinner('Processing... %s')
 		spinner.setSpinnerString('|/-\\')
 		spinner.start()
-		const infiniteLoading = setInterval(() => {
-			if (answer) clearInterval(infiniteLoading)
-			setTimeout(() => {
-				callback(answer)
-				spinner.stop()
-			}, 2000 + 100)
-		}, 100)
+		setTimeout(() => {
+			callback(answer)
+			spinner.stop()
+		}, 10000)
 	})
 }

@@ -17,7 +17,9 @@ class Gopack {
     increment = 0;
     barProgress = undefined;
     handler = undefined;
+    handlerLoading = undefined;
     spinner = undefined;
+    percentage = 0;
     loadingSpinner() {
         this.spinner = new cli_spinner_1.Spinner('Processing... %s');
         this.spinner.setSpinnerString('|/-\\');
@@ -60,16 +62,23 @@ class Gopack {
                 clearInterval(this.handler);
                 this.barProgress.stop();
                 this.loadingSpinner();
+                setTimeout(() => this.installedGolangPackage(), 1000);
+            }
+        }, 100);
+        this.handlerLoading = setInterval(() => {
+            this.percentage += 1;
+            if (this.percentage >= 200) {
+                clearInterval(this.handlerLoading);
+                this.loadingSpinner();
                 setTimeout(() => {
-                    this.installedGolangPackage();
                     this.spinner.stop();
-                }, 1000);
-                setTimeout(() => clear_1.default(), 1200);
+                }, 1400);
                 setTimeout(() => {
+                    clear_1.default();
                     consola_1.default.success(chalk_1.default.bold.white('Installed go package success'));
                     fileSystem_1.deleteData();
                     process.exit(0);
-                }, 1500);
+                }, 1600);
             }
         }, 100);
     }
