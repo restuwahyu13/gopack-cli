@@ -1,0 +1,104 @@
+{
+	"name": "gopack",
+	"version": "0.0.1",
+	"description": "Gopack minimalize instant package downloader for Go programming",
+	"main": "./dist/command.js",
+	"files": [
+		"/dist/**"
+	],
+	"bin": {
+		"gopack": "dist/command.js"
+	},
+	"scripts": {
+		"clean": "rimraf dist",
+		"compiler": "npm run clean && tsc --pretty",
+		"build": "npm run compiler",
+		"test": "jest",
+		"test:coverage": "jest --coverage",
+		"test:watch": "jest --watchAll",
+		"test:coveralls": "jest --coverage && coveralls < coverage/lcov.info",
+		"lint": "eslint src/**/*.{ts,spec.ts,test.ts} --fix",
+		"format": "prettier src/**/*.{ts,spec.ts,test.ts} --write",
+		"lint:fix": "npm run format && npm run lint"
+	},
+	"author": {
+		"name": "Restu Wahyu Saputra",
+		"email": "restuwahyu13@gmail.com"
+	},
+	"repository": {
+		"url": "https://github.com/restuwahyu13/gopack"
+	},
+	"homepage": "https://github.com/restuwahyu13/gopack#readme",
+	"bugs": {
+		"url": "https://github.com/restuwahyu13/gopack/issues"
+	},
+	"license": "MIT",
+	"engines": {
+		"node": ">=12",
+		"npm": ">=6"
+	},
+	"keywords": [
+		"cli",
+		"shell",
+		"package downloader",
+		"golang",
+		"go",
+		"command",
+		"node",
+		"nodejs",
+		"node_modules",
+		"javascript",
+		"typescript"
+	],
+	"dependencies": {
+		"axios": "^0.21.1",
+		"chalk": "^4.1.1",
+		"clear": "^0.1.0",
+		"cli-progress": "^3.9.0",
+		"cli-spinner": "^0.2.10",
+		"colors": "^1.4.0",
+		"commander": "^8.0.0",
+		"consola": "^2.15.3",
+		"figlet": "^1.5.0",
+		"inquirer": "^8.1.1",
+		"shelljs": "^0.8.4"
+	},
+	"devDependencies": {
+		"@types/axios": "^0.14.0",
+		"@types/chalk": "^2.2.0",
+		"@types/clear": "^0.1.2",
+		"@types/cli-progress": "^3.9.2",
+		"@types/cli-spinner": "^0.2.1",
+		"@types/colors": "^1.2.1",
+		"@types/commander": "^2.12.2",
+		"@types/consola": "^2.2.5",
+		"@types/figlet": "^1.5.4",
+		"@types/inquirer": "^7.3.3",
+		"@types/jest": "^26.0.20",
+		"@types/node": "^15.0.1",
+		"@types/shelljs": "^0.8.9",
+		"@typescript-eslint/eslint-plugin": "^4.12.0",
+		"@typescript-eslint/parser": "^4.12.0",
+		"coveralls": "^3.1.0",
+		"eslint": "^7.17.0",
+		"eslint-config-prettier": "^8.0.0",
+		"eslint-config-standard": "^16.0.2",
+		"eslint-plugin-import": "^2.22.1",
+		"eslint-plugin-jest": "^24.1.3",
+		"eslint-plugin-node": "^11.1.0",
+		"eslint-plugin-prettier": "^3.3.1",
+		"eslint-plugin-promise": "^5.1.0",
+		"husky": "^6.0.0",
+		"jest": "^26.6.3",
+		"prettier": "^2.2.1",
+		"rimraf": "^3.0.2",
+		"ts-jest": "^26.4.4",
+		"ts-node": "^10.0.0",
+		"typescript": "^4.1.3"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "npm run lint:fix"
+		}
+	}
+}
