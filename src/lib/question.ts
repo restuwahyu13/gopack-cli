@@ -38,9 +38,12 @@ export default (prompt: any, callback: any): void => {
 		let spinner = new Spinner('Processing... %s')
 		spinner.setSpinnerString('|/-\\')
 		spinner.start()
-		setTimeout(() => {
-			callback(answer)
-			spinner.stop()
-		}, 2000)
+		const infiniteLoading = setInterval(() => {
+			if (answer) clearInterval(infiniteLoading)
+			setTimeout(() => {
+				callback(answer)
+				spinner.stop()
+			}, 2000 + 100)
+		}, 100)
 	})
 }

@@ -39,10 +39,14 @@ exports.default = (prompt, callback) => {
         let spinner = new cli_spinner_1.Spinner('Processing... %s');
         spinner.setSpinnerString('|/-\\');
         spinner.start();
-        setTimeout(() => {
-            callback(answer);
-            spinner.stop();
-        }, 2000);
+        const infiniteLoading = setInterval(() => {
+            if (answer)
+                clearInterval(infiniteLoading);
+            setTimeout(() => {
+                callback(answer);
+                spinner.stop();
+            }, 2000 + 100);
+        }, 100);
     });
 };
 //# sourceMappingURL=question.js.map

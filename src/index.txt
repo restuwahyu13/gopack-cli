@@ -14,6 +14,7 @@ export default class Gopack {
 	barProgress = undefined
 	handler = undefined
 	spinner = undefined
+	infiniteLoading = false
 
 	loadingSpinner(): void {
 		this.spinner = new Spinner('Processing... %s')
@@ -42,6 +43,7 @@ export default class Gopack {
 	installedGolangPackage(): void {
 		const packages = readData()
 		packages.forEach((val) => shell.exec(`go get ${val}`, { silent: true }))
+		this.infiniteLoading = true
 	}
 
 	progressBarDownload(): void {
@@ -60,21 +62,32 @@ export default class Gopack {
 		this.handler = setInterval(() => {
 			this.increment += 1
 			this.barProgress.update(this.increment)
+			this.infiniteLoading ? clearInterval(this.handler) : clearInterval()
 
 			if (this.increment >= 100) {
-				clearInterval(this.handler)
 				this.barProgress.stop()
 				this.loadingSpinner()
-				setTimeout(() => {
-					this.installedGolangPackage()
-					this.spinner.stop()
-				}, 1000)
-				setTimeout(() => clearScreen(), 1200)
-				setTimeout(() => {
-					consola.success(chalk.bold.white('Installed go package success'))
-					deleteData()
-					process.exit(0)
-				}, 1500)
+			} else {
+				setTimeout(() => this.installedGolangPackage(), 1000)
+				this.infiniteLoading
+					? setTimeout(() => {
+							this.spinner.stop()
+					  }, 1200)
+					: setTimeout(() => {
+							this.spinner.stop()
+					  }, 1000 + 100)
+				this.infiniteLoading ? setTimeout(() => clearScreen(), 1400) : setTimeout(() => clearScreen(), 1400 + 100)
+				this.infiniteLoading
+					? setTimeout(() => {
+							consola.success(chalk.bold.white('Installed go package success'))
+							deleteData()
+							process.exit(0)
+					  }, 1600)
+					: setTimeout(() => {
+							consola.success(chalk.bold.white('Installed go package success'))
+							deleteData()
+							process.exit(0)
+					  }, 1600 + 100)
 			}
 		}, 100)
 	}
