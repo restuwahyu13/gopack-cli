@@ -1,5 +1,5 @@
 {
-	"name": "gopack",
+	"name": "gopack-cli",
 	"version": "0.0.1-beta",
 	"description": "Gopack instant package downloader for Go programming",
 	"main": "index.js",
