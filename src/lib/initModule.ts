@@ -15,25 +15,26 @@ export default (program: Record<string, any>): void => {
 			prompt({
 				type: 'input',
 				name: 'moduleName',
-				message: 'Initializing go module name ?',
-				validate: function (input: string): any {
-					let done = this.async()
-					setTimeout(function () {
-						const validate = /[a-zA-Z]/gi.test(input)
-						if (!validate) {
-							done('Input value must be string format')
-							return
-						}
-						done(null, true)
-					}, 2000)
-				}
+				message: 'Initializing go module name ?'
+				// validate: function (input: string): any {
+				// 	let done = this.async()
+				// 	setTimeout(function () {
+				// 		const validate = /[a-zA-Z]/gi.test(input)
+				// 		if (!validate) {
+				// 			done('module name must be string format')
+				// 			return
+				// 		}
+				// 		done(null, true)
+				// 	}, 2000)
+				// }
 			}).then((input: Record<string, any>) => {
 				if (!fs.existsSync(path.resolve(__dirname, 'go.mod'))) {
 					shell.exec(`go mod init ${input.moduleName}`, { silent: true })
 					consola.success(chalk.bold.white('Initializing go module success'))
 					process.exit(0)
 				} else {
-					consola.error(chalk.bold.white('Initializing go module failed'))
+					cleanup()
+					consola.error(chalk.bold.white('Initializing go module error'))
 					process.exit(0)
 				}
 			})

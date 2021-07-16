@@ -17,4 +17,3 @@ exports.default = (program) => {
         }
     });
 };
-//# sourceMappingURL=helpMenu.js.map

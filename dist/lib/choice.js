@@ -33,4 +33,3 @@ exports.default = async (prompt, answer, callback) => {
         process.exit(0);
     }
 };
-//# sourceMappingURL=choice.js.map

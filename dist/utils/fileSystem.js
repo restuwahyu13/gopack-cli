@@ -72,7 +72,7 @@ const readData = () => {
     if (process.platform === 'win32') {
         fs_1.default.accessSync(path_1.default.resolve(process.env.TMP));
         const filePath = `${process.env.TMP}/`;
-        const toArray = fs_1.default.readFileSync(path_1.default.resolve(filePath, 'gopack.txt'), { encoding: 'utf-8' }).split(' ');
+        const toArray = fs_1.default.readFileSync(path_1.default.resolve(filePath, '.gopackrc'), { encoding: 'utf-8' }).split(' ');
         return Array.from(new Set([
             ...toArray
                 .map((val) => val.trim().replace(/[\s]/gi, ','))
@@ -83,7 +83,7 @@ const readData = () => {
     }
     else {
         const filePath = '/tmp';
-        const toArray = fs_1.default.readFileSync(path_1.default.resolve(filePath, 'gopack.txt'), { encoding: 'utf-8' }).split(' ');
+        const toArray = fs_1.default.readFileSync(path_1.default.resolve(filePath, '.gopackrc'), { encoding: 'utf-8' }).split(' ');
         return Array.from(new Set([
             ...toArray
                 .map((val) => val.trim().replace(/[\s]/gi, ','))
@@ -98,12 +98,11 @@ const deleteData = () => {
     if (process.platform === 'win32') {
         fs_1.default.accessSync(path_1.default.resolve(process.env.TMP));
         const filePath = `${process.env.TMP}/`;
-        fs_1.default.unlinkSync(path_1.default.resolve(filePath, 'gopack.txt'));
+        fs_1.default.unlinkSync(path_1.default.resolve(filePath, '.gopackrc'));
     }
     else {
         const filePath = '/tmp';
-        fs_1.default.unlinkSync(path_1.default.resolve(filePath, 'gopack.txt'));
+        fs_1.default.unlinkSync(path_1.default.resolve(filePath, '.gopackrc'));
     }
 };
 exports.deleteData = deleteData;
-//# sourceMappingURL=fileSystem.js.map

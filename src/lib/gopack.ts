@@ -5,7 +5,7 @@ import cliProgress from 'cli-progress'
 import colors from 'colors'
 import { Spinner } from 'cli-spinner'
 import clearScreen from 'clear'
-import { readData, deleteData } from './utils/fileSystem'
+import { readData, deleteData } from '../utils/fileSystem'
 import path from 'path'
 import fs from 'fs'
 
@@ -24,8 +24,9 @@ export default class Gopack {
 	}
 
 	checkGomod(): void {
-		let checkGomod = fs.existsSync(path.resolve(process.cwd(), 'go.mod'))
-		if (!checkGomod) {
+		let checkGomodFile = fs.existsSync(path.resolve(process.cwd(), 'go.mod'))
+		if (!checkGomodFile) {
+			clearScreen()
 			consola.error(chalk.bold.white('Installed go package error'))
 			process.exit(0)
 		}

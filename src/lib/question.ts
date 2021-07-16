@@ -9,7 +9,7 @@ export default (prompt: any, callback: any): void => {
 			validate: function (input: string) {
 				let done = this.async()
 				setTimeout(function () {
-					const validate = /^[a-zA-Z]$/gi.test(input)
+					const validate = /^[a-zA-Z.-]+$/gi.test(input.trim())
 					if (!validate) {
 						done('go package name must be string format')
 						return
@@ -25,7 +25,7 @@ export default (prompt: any, callback: any): void => {
 			validate: function (input: string) {
 				let done = this.async()
 				setTimeout(function () {
-					const validate = /[\d]/gi.test(input)
+					const validate = /^[\d.-]+$/gi.test(input)
 					if (!validate) {
 						done('limit must be number format')
 						return
@@ -35,12 +35,17 @@ export default (prompt: any, callback: any): void => {
 			}
 		}
 	]).then((answer: Record<string, any>) => {
+		let increment = 0
 		let spinner = new Spinner('Processing... %s')
 		spinner.setSpinnerString('|/-\\')
 		spinner.start()
-		setTimeout(() => {
-			callback(answer)
-			spinner.stop()
-		}, 10000)
+		let handlerLoading = setInterval(() => {
+			increment += 1
+			if (increment >= 50) {
+				clearInterval(handlerLoading)
+				callback(answer)
+				spinner.stop()
+			}
+		}, 300)
 	})
 }

@@ -19,18 +19,18 @@ exports.default = (program) => {
         inquirer_1.prompt({
             type: 'input',
             name: 'moduleName',
-            message: 'Initializing go module name ?',
-            validate: function (input) {
-                let done = this.async();
-                setTimeout(function () {
-                    const validate = /[a-zA-Z]/gi.test(input);
-                    if (!validate) {
-                        done('Input value must be string format');
-                        return;
-                    }
-                    done(null, true);
-                }, 2000);
-            }
+            message: 'Initializing go module name ?'
+            // validate: function (input: string): any {
+            // 	let done = this.async()
+            // 	setTimeout(function () {
+            // 		const validate = /[a-zA-Z]/gi.test(input)
+            // 		if (!validate) {
+            // 			done('module name must be string format')
+            // 			return
+            // 		}
+            // 		done(null, true)
+            // 	}, 2000)
+            // }
         }).then((input) => {
             if (!fs_1.default.existsSync(path_1.default.resolve(__dirname, 'go.mod'))) {
                 shelljs_1.default.exec(`go mod init ${input.moduleName}`, { silent: true });
@@ -38,10 +38,10 @@ exports.default = (program) => {
                 process.exit(0);
             }
             else {
-                consola_1.default.error(chalk_1.default.bold.white('Initializing go module failed'));
+                clear_1.default();
+                consola_1.default.error(chalk_1.default.bold.white('Initializing go module error'));
                 process.exit(0);
             }
         });
     });
 };
-//# sourceMappingURL=initModule.js.map

@@ -1,13 +1,13 @@
 {
 	"name": "gopack",
-	"version": "0.0.1",
+	"version": "0.0.1-beta",
 	"description": "Gopack minimalize instant package downloader for Go programming",
-	"main": "./dist/command.js",
+	"main": "dist/bin.js",
 	"files": [
 		"/dist/**"
 	],
 	"bin": {
-		"gopack": "dist/command.js"
+		"gopack": "dist/bin.js"
 	},
 	"scripts": {
 		"clean": "rimraf dist",
@@ -39,7 +39,6 @@
 	},
 	"keywords": [
 		"cli",
-		"shell",
 		"package downloader",
 		"golang",
 		"go",

@@ -11,4 +11,3 @@ const detectKeyboard = () => {
     });
 };
 exports.detectKeyboard = detectKeyboard;
-//# sourceMappingURL=detectKeyboard.js.map
