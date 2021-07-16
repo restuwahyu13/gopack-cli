@@ -52,7 +52,7 @@ install:
 
 build: testc.o compile.o
 testc.o:
-	${NPM} ${NPM_FLAGS} test:coveralls
+	${NPM} ${NPM_FLAGS} test
 
 compile.o:
 	${NPM} ${NPM_FLAGS} build
