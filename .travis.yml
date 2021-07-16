@@ -2,12 +2,6 @@ language: node_js
 node_js:
   - node
   - 14
-env:
-  global:
-    - COVERALLS_PARALLEL=true
-    - COVERALLS_SERVICE_NAME=travis-pro
-    - COVERALLS_REPO_TOKEN=EXaNGHjM2iUlYmPTbZiaaNlqjAUzdR6Qx
-    - COVERALLS_GIT_BRANCH=main
 addons:
   apt:
     packages:
