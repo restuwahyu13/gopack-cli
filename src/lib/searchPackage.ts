@@ -2,7 +2,7 @@ import { prompt } from 'inquirer'
 import cleanup from 'clear'
 import question from './question'
 import choice from './choice'
-import Gopack from './gopack'
+import Gopack from '../'
 import { writeData } from '../utils/fileSystem'
 
 export default (program: Record<string, any>): void => {

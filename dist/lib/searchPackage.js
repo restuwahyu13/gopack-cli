@@ -7,10 +7,10 @@ const inquirer_1 = require("inquirer");
 const clear_1 = __importDefault(require("clear"));
 const question_1 = __importDefault(require("./question"));
 const choice_1 = __importDefault(require("./choice"));
-const gopack_1 = __importDefault(require("./gopack"));
+const __1 = __importDefault(require("../"));
 const fileSystem_1 = require("../utils/fileSystem");
 exports.default = (program) => {
-    let gopack = new gopack_1.default();
+    let gopack = new __1.default();
     program
         .command('search')
         .description('search go package library')
