@@ -1,6 +1,6 @@
 ## BUILD STAGE ONE
 
-FROM node:14-alpine as midtrans-node
+FROM node:14-alpine as gopack-cli
 COPY package*.json \
 	.coveralls.yml \
 	.editorconfig \
@@ -20,8 +20,8 @@ RUN apk add make \
 
 ## BUILD STAGE TWO
 
-FROM midtrans-node
+FROM gopack-cli
 WORKDIR /usr/src/app
-COPY --from=midtrans-node ./ /usr/src/app
+COPY --from=gopack-cli ./ /usr/src/app
 RUN make build
 CMD docker images
