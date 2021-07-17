@@ -14,7 +14,7 @@ describe('Gopack Testing Group', function () {
 	let gopack: any
 
 	beforeAll(function () {
-		writeData('.gopackrc', ['gopack'])
+		writeData('.gopack', ['gopack'])
 		gopack = new Gopack()
 	})
 
@@ -23,7 +23,7 @@ describe('Gopack Testing Group', function () {
 	})
 
 	it('Should be created file success', function () {
-		const fileExist = fs.existsSync(path.resolve('/tmp', '.gopackrc'))
+		const fileExist = fs.existsSync(path.resolve('/tmp', '.gopack'))
 		expect(fileExist).toBeTruthy()
 	})
 
@@ -35,7 +35,7 @@ describe('Gopack Testing Group', function () {
 
 	it('Should be delete file success', function () {
 		deleteData()
-		const fileExist = fs.existsSync(path.resolve('/tmp', '.gopackrc'))
+		const fileExist = fs.existsSync(path.resolve('/tmp', '.gopack'))
 		expect(fileExist).toBeFalsy()
 	})
 

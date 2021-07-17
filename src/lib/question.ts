@@ -1,3 +1,9 @@
+/**
+ * Gopack CLI
+ * @author Copyright(c) 2021 by Restu wahyu saputra
+ * MIT Licensed
+ */
+
 import { Spinner } from 'cli-spinner'
 
 export default (prompt: any, callback: any): void => {

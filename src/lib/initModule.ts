@@ -1,3 +1,9 @@
+/**
+ * Gopack CLI
+ * @author Copyright(c) 2021 by Restu wahyu saputra
+ * MIT Licensed
+ */
+
 import { prompt } from 'inquirer'
 import consola from 'consola'
 import chalk from 'chalk'

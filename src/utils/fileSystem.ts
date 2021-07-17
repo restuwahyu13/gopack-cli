@@ -1,3 +1,9 @@
+/**
+ * Gopack CLI
+ * @author Copyright(c) 2021 by Restu wahyu saputra
+ * MIT Licensed
+ */
+
 import fs from 'fs'
 import path from 'path'
 
@@ -76,7 +82,7 @@ export const readData = (): string[] => {
 	if (process.platform === 'win32') {
 		fs.accessSync(path.resolve(process.env.TMP))
 		const filePath = `${process.env.TMP}/`
-		const toArray = fs.readFileSync(path.resolve(filePath, '.gopackrc'), { encoding: 'utf-8' }).split(' ')
+		const toArray = fs.readFileSync(path.resolve(filePath, '.gopack'), { encoding: 'utf-8' }).split(' ')
 		return Array.from(
 			new Set([
 				...toArray
@@ -88,7 +94,7 @@ export const readData = (): string[] => {
 		)
 	} else {
 		const filePath = '/tmp'
-		const toArray = fs.readFileSync(path.resolve(filePath, '.gopackrc'), { encoding: 'utf-8' }).split(' ')
+		const toArray = fs.readFileSync(path.resolve(filePath, '.gopack'), { encoding: 'utf-8' }).split(' ')
 		return Array.from(
 			new Set([
 				...toArray
@@ -105,9 +111,22 @@ export const deleteData = (): void => {
 	if (process.platform === 'win32') {
 		fs.accessSync(path.resolve(process.env.TMP))
 		const filePath = `${process.env.TMP}/`
-		fs.unlinkSync(path.resolve(filePath, '.gopackrc'))
+		fs.unlinkSync(path.resolve(filePath, '.gopack'))
 	} else {
 		const filePath = '/tmp'
-		fs.unlinkSync(path.resolve(filePath, '.gopackrc'))
+		fs.unlinkSync(path.resolve(filePath, '.gopack'))
+	}
+}
+
+export const existData = (): boolean => {
+	if (process.platform === 'win32') {
+		fs.accessSync(path.resolve(process.env.TMP))
+		const filePath = `${process.env.TMP}/`
+		const fileExist = fs.existsSync(path.resolve(filePath, 'gopack'))
+		return fileExist
+	} else {
+		const filePath = '/tmp'
+		const fileExist = fs.existsSync(path.resolve(filePath, 'gopack'))
+		return fileExist
 	}
 }
