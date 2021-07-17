@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { writeData, readData, deleteData } from '../src/utils/fileSystem'
 import choice from '../src/lib/choice'
+import choiceBack from '../src/lib/choiceBack'
 import helpMenu from '../src/lib/helpMenu'
 import question from '../src/lib/question'
 import searchPackage from '../src/lib/searchPackage'
@@ -43,6 +44,12 @@ describe('Gopack Testing Group', function () {
 		expect(choice).toBeDefined()
 		expect(choice).toBeInstanceOf(Function)
 	})
+
+	it('Should be choiceBack is defined', function () {
+		expect(choiceBack).toBeDefined()
+		expect(choiceBack).toBeInstanceOf(Function)
+	})
+
 	it('Should be helpMenu is defined', function () {
 		expect(helpMenu).toBeDefined()
 		expect(helpMenu).toBeInstanceOf(Function)
