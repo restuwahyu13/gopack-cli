@@ -16,7 +16,7 @@
 ## Installation
 
 ```bash
-$ npm install gopack-cli -S or yarn add gopack-cli -S
+$ npm install gopack-cli -g or yarn add gopack-cli -g
 ```
 
 ## Command
