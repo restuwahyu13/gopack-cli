@@ -5,6 +5,7 @@
 **Gopack CLI** is instant package downloader for Go Programming, if you use **Gopack CLI** you can download your favorite package library with very easy, just play the keyboard and select the package you need, wait a while until your package is installed and **Gopack CLI** also supports installing multiple modules at the same time.
 
 - [Installation](#installation)
+- [Feature](#feature)
 - [Command](#command)
 - [Example Usage](#example-usage)
 - [Noted](#noted)
@@ -18,6 +19,13 @@
 ```bash
 $ npm install gopack-cli -g or yarn add gopack-cli -g
 ```
+
+## Feature
+
+- [x] Easy to use
+- [x] Instant initialize gomod 
+- [x] Install multiple Go module up to 50x package library at the same time
+- [x] Install new differen Go module, after installation Go module previous success up to more than 10x
 
 ## Command
 ```sh
