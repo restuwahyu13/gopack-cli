@@ -52,6 +52,6 @@ export default (prompt: any, callback: any): void => {
 				spinner.stop()
 				callback(answer)
 			}
-		}, 200)	
+		}, 200)
 	})
 }

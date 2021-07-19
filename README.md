@@ -7,6 +7,7 @@
 - [Installation](#installation)
 - [Command](#command)
 - [Example Usage](#example-usage)
+- [Noted](#noted)
 - [Testing](#testing)
 - [Bugs](#bugs)
 - [Contributing](#contributing)
@@ -44,6 +45,13 @@ Commands:
 ## Example Usage
 
 <img src="images/example.gif" alt="example-giff"/>
+
+## Noted
+
+If you select package library and after installation the package is not installed in your `go.mod` or If you search package library name is not available, because **Gopack CLI** is directly connected to Godoc API and Godoc API is outdated.
+
+- package library deleted from owner
+- package library not available on server and you must install package library manual
 
 ## Testing
 
