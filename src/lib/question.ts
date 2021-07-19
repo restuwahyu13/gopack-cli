@@ -17,7 +17,7 @@ export default (prompt: any, callback: any): void => {
 				setTimeout(function () {
 					const validate = /^[a-zA-Z.-]+$/gi.test(input.trim())
 					if (!validate) {
-						done('go package name must be string format')
+						done('Go package name must be string format')
 						return
 					}
 					done(null, true)
@@ -33,7 +33,7 @@ export default (prompt: any, callback: any): void => {
 				setTimeout(function () {
 					const validate = /^[\d.-]+$/gi.test(input)
 					if (!validate) {
-						done('limit must be number format')
+						done('Limit must be number format')
 						return
 					}
 					done(null, true)
@@ -49,9 +49,9 @@ export default (prompt: any, callback: any): void => {
 			increment += 1
 			if (increment >= 50) {
 				clearInterval(handlerLoading)
-				callback(answer)
 				spinner.stop()
+				callback(answer)
 			}
-		}, 300)
+		}, 200)	
 	})
 }

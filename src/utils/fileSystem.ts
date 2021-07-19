@@ -122,11 +122,11 @@ export const existData = (): boolean => {
 	if (process.platform === 'win32') {
 		fs.accessSync(path.resolve(process.env.TMP))
 		const filePath = `${process.env.TMP}/`
-		const fileExist = fs.existsSync(path.resolve(filePath, 'gopack'))
+		const fileExist = fs.existsSync(path.resolve(filePath, '.gopack'))
 		return fileExist
 	} else {
 		const filePath = '/tmp'
-		const fileExist = fs.existsSync(path.resolve(filePath, 'gopack'))
+		const fileExist = fs.existsSync(path.resolve(filePath, '.gopack'))
 		return fileExist
 	}
 }

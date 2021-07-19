@@ -5,12 +5,12 @@
  */
 
 import axios from 'axios'
-import consola from 'consola'
-import chalk from 'chalk'
 import cleanup from 'clear'
-import { deleteData, readData } from '../utils/fileSystem'
+import notifier from 'node-notifier'
+import { deleteData, readData, existData } from '../utils/fileSystem'
 import choiceBack from './choiceBack'
 import Gopack from '../'
+import { throwError } from '../utils/customError'
 
 export default async (prompt: any, answer: Record<string, any>, callback: any): Promise<void> => {
 	let gopack = new Gopack()
@@ -34,24 +34,32 @@ export default async (prompt: any, answer: Record<string, any>, callback: any): 
 			}).then((answer: Record<string, any>) => callback(answer, packages))
 		})
 	} catch (err) {
-		if (readData().length > 0) {
-			choiceBack(prompt, (answer) => {
-				if (answer.confirms === true) {
-					cleanup()
-					gopack.checkGomod()
-					gopack.checkGolangPackage()
-				} else {
-					cleanup()
-					deleteData()
-					consola.error(chalk.bold.white('Installed go package rejected'))
-					process.exit(0)
-				}
-			})
+		if (existData()) {
+			if (readData().length > 0) {
+				choiceBack(prompt, (answer) => {
+					if (answer.confirms === true) {
+						gopack.checkGomod()
+						gopack.checkGolangPackage()
+					} else {
+						cleanup()
+						deleteData()
+						throw throwError({ message: 'Installed go package rejected' })
+					}
+				})
+			} else {
+				cleanup()
+				deleteData()
+				throw throwError({ message: 'Go package unavailable' })
+			}
 		} else {
 			cleanup()
-			deleteData()
-			consola.error(chalk.bold.white('go package unavailable'))
-			process.exit(0)
+			notifier.notify({
+				title: 'Gopack CLI Notification',
+				message: 'Go package unavailable',
+				sound: true,
+				wait: true,
+				timeout: 6
+			})
 		}
 	}
 }

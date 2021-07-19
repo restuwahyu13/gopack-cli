@@ -11,6 +11,7 @@ import shell from 'shelljs'
 import fs from 'fs'
 import path from 'path'
 import cleanup from 'clear'
+import { throwError } from '../utils/customError'
 
 export default (program: Record<string, any>): void => {
 	program
@@ -22,17 +23,6 @@ export default (program: Record<string, any>): void => {
 				type: 'input',
 				name: 'moduleName',
 				message: 'Initializing go module name ?'
-				// validate: function (input: string): any {
-				// 	let done = this.async()
-				// 	setTimeout(function () {
-				// 		const validate = /[a-zA-Z]/gi.test(input)
-				// 		if (!validate) {
-				// 			done('module name must be string format')
-				// 			return
-				// 		}
-				// 		done(null, true)
-				// 	}, 2000)
-				// }
 			}).then((input: Record<string, any>) => {
 				if (!fs.existsSync(path.resolve(__dirname, 'go.mod'))) {
 					shell.exec(`go mod init ${input.moduleName}`, { silent: true })
@@ -40,8 +30,7 @@ export default (program: Record<string, any>): void => {
 					process.exit(0)
 				} else {
 					cleanup()
-					consola.error(chalk.bold.white('Initializing go module error'))
-					process.exit(0)
+					throw throwError({ message: 'Initializing go module error' })
 				}
 			})
 		})

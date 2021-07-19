@@ -17,3 +17,6 @@ jest.config.js
 Makefile
 tsconfig.json
 package-lock.json
+gopack-giff.gif
+.github
+images
