@@ -16,7 +16,7 @@ export default (program: Record<string, any>): void => {
 		},
 		(err: any, asciiText: string) => {
 			if (!err) {
-				program.version('gopack v0.0.1-beta', '-v, --version', 'show version cli app')
+				program.version('gopack v0.0.1', '-v, --version', 'show version cli app')
 				program.addHelpText('beforeAll', `${asciiText} \n`)
 				program.parse(process.argv)
 			}

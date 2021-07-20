@@ -8,10 +8,10 @@ import { deleteData, existData } from './fileSystem'
 
 export const detectKeyboard = (): void => {
 	process.openStdin().on('keypress', function (_, key: Record<string, any>) {
-		if (existData() !== false) {
+		if (existData('.gopack') !== false) {
 			if (key && key.name === 'c' && key.ctrl) {
-				deleteData()
-				process.exit()
+				deleteData('.gopack')
+				process.exit(0)
 			}
 		}
 	})

@@ -5,12 +5,11 @@
  */
 
 import axios from 'axios'
-import cleanup from 'clear'
 import notifier from 'node-notifier'
+import { clearScreen } from '../utils/clearSchreen'
 import { deleteData, readData, existData } from '../utils/fileSystem'
 import choiceBack from './choiceBack'
 import Gopack from '../'
-import { throwError } from '../utils/customError'
 
 export default async (prompt: any, answer: Record<string, any>, callback: any): Promise<void> => {
 	let gopack = new Gopack()
@@ -19,7 +18,7 @@ export default async (prompt: any, answer: Record<string, any>, callback: any): 
 		const newResponse = res.data.results.slice(0, answer.limit).map((val: Record<string, any>): Record<string, any> => {
 			return { name: val.path }
 		})
-		cleanup()
+		clearScreen()
 		prompt({
 			choices: newResponse,
 			type: 'checkbox',
@@ -34,25 +33,36 @@ export default async (prompt: any, answer: Record<string, any>, callback: any): 
 			}).then((answer: Record<string, any>) => callback(answer, packages))
 		})
 	} catch (err) {
-		if (existData()) {
-			if (readData().length > 0) {
+		if (existData('.gopack')) {
+			if (readData('.gopack').length > 0) {
 				choiceBack(prompt, (answer) => {
 					if (answer.confirms === true) {
-						gopack.checkGomod()
-						gopack.checkGolangPackage()
+						gopack.downloadGolangPackage()
 					} else {
-						cleanup()
-						deleteData()
-						throw throwError({ message: 'Installed go package rejected' })
+						clearScreen()
+						deleteData('.gopack')
+						notifier.notify({
+							title: 'Gopack CLI Notification',
+							message: 'Installed go package rejected',
+							sound: true,
+							wait: true,
+							timeout: 6
+						})
 					}
 				})
 			} else {
-				cleanup()
-				deleteData()
-				throw throwError({ message: 'Go package unavailable' })
+				clearScreen()
+				deleteData('.gopack')
+				notifier.notify({
+					title: 'Gopack CLI Notification',
+					message: 'Go package unavailable',
+					sound: true,
+					wait: true,
+					timeout: 6
+				})
 			}
 		} else {
-			cleanup()
+			clearScreen()
 			notifier.notify({
 				title: 'Gopack CLI Notification',
 				message: 'Go package unavailable',

@@ -12,9 +12,16 @@ import initializeModule from '../lib/initModule'
 import searchPackage from '../lib/searchPackage'
 import helpMenu from '../lib/helpMenu'
 import { detectKeyboard } from '../utils/detectKeyboard'
+import Gopack from '../'
 ;(async function (): Promise<void> {
-	detectKeyboard()
-	initializeModule(program)
-	searchPackage(program)
-	helpMenu(program)
+	const gopack = new Gopack()
+	const checkGolangPackageNotDownload = gopack.checkGolangPackageNotDownload()
+	if (checkGolangPackageNotDownload === true) {
+		detectKeyboard()
+		initializeModule(program)
+		searchPackage(program)
+		helpMenu(program)
+	} else {
+		gopack.checkGolangPackageNotDownload()
+	}
 })()

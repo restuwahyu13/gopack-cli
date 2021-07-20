@@ -78,11 +78,11 @@ export const writeData = (nameFile: string, data: string[]): string[] => {
 	}
 }
 
-export const readData = (): string[] => {
+export const readData = (nameFile: string): string[] => {
 	if (process.platform === 'win32') {
 		fs.accessSync(path.resolve(process.env.TMP))
 		const filePath = `${process.env.TMP}/`
-		const toArray = fs.readFileSync(path.resolve(filePath, '.gopack'), { encoding: 'utf-8' }).split(' ')
+		const toArray = fs.readFileSync(path.resolve(filePath, `${nameFile}`), { encoding: 'utf-8' }).split(' ')
 		return Array.from(
 			new Set([
 				...toArray
@@ -94,7 +94,7 @@ export const readData = (): string[] => {
 		)
 	} else {
 		const filePath = '/tmp'
-		const toArray = fs.readFileSync(path.resolve(filePath, '.gopack'), { encoding: 'utf-8' }).split(' ')
+		const toArray = fs.readFileSync(path.resolve(filePath, `${nameFile}`), { encoding: 'utf-8' }).split(' ')
 		return Array.from(
 			new Set([
 				...toArray
@@ -107,26 +107,26 @@ export const readData = (): string[] => {
 	}
 }
 
-export const deleteData = (): void => {
+export const deleteData = (nameFile: string): void => {
 	if (process.platform === 'win32') {
 		fs.accessSync(path.resolve(process.env.TMP))
 		const filePath = `${process.env.TMP}/`
-		fs.unlinkSync(path.resolve(filePath, '.gopack'))
+		fs.unlinkSync(path.resolve(filePath, `${nameFile}`))
 	} else {
 		const filePath = '/tmp'
-		fs.unlinkSync(path.resolve(filePath, '.gopack'))
+		fs.unlinkSync(path.resolve(filePath, `${nameFile}`))
 	}
 }
 
-export const existData = (): boolean => {
+export const existData = (nameFile: string): boolean => {
 	if (process.platform === 'win32') {
 		fs.accessSync(path.resolve(process.env.TMP))
 		const filePath = `${process.env.TMP}/`
-		const fileExist = fs.existsSync(path.resolve(filePath, '.gopack'))
+		const fileExist = fs.existsSync(path.resolve(filePath, `${nameFile}`))
 		return fileExist
 	} else {
 		const filePath = '/tmp'
-		const fileExist = fs.existsSync(path.resolve(filePath, '.gopack'))
+		const fileExist = fs.existsSync(path.resolve(filePath, `${nameFile}`))
 		return fileExist
 	}
 }

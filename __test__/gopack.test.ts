@@ -20,7 +20,7 @@ describe('Gopack Testing Group', function () {
 	})
 
 	afterAll(function () {
-		deleteData()
+		deleteData('.gopack')
 	})
 
 	it('Should be created file success', function () {
@@ -29,13 +29,13 @@ describe('Gopack Testing Group', function () {
 	})
 
 	it('Should be read file success', function () {
-		const readFile = readData()
+		const readFile = readData('.gopack')
 		expect(readFile).toBeInstanceOf(Array)
 		expect(readFile).toEqual(['gopack'])
 	})
 
 	it('Should be delete file success', function () {
-		deleteData()
+		deleteData('.gopack')
 		const fileExist = fs.existsSync(path.resolve('/tmp', '.gopack'))
 		expect(fileExist).toBeFalsy()
 	})

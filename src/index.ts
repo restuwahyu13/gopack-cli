@@ -8,12 +8,12 @@ import shell from 'shelljs'
 import consola from 'consola'
 import chalk from 'chalk'
 import cliProgress from 'cli-progress'
-import colors from 'colors'
-import { Spinner } from 'cli-spinner'
-import cleanup from 'clear'
-import { readData, deleteData } from './utils/fileSystem'
 import path from 'path'
 import fs from 'fs'
+import colors from 'colors'
+import { Spinner } from 'cli-spinner'
+import { clearScreen } from './utils/clearSchreen'
+import { readData, deleteData, writeData } from './utils/fileSystem'
 import { throwError } from './utils/customError'
 
 export default class Gopack {
@@ -30,26 +30,37 @@ export default class Gopack {
 		this.spinner.start()
 	}
 
-	checkGomod(): void {
+	checkGomod(): boolean | any {
 		let checkGomodFile = fs.existsSync(path.resolve(process.cwd(), 'go.mod'))
 		if (!checkGomodFile) {
-			cleanup()
+			clearScreen()
 			throw throwError({ message: 'Installed go package error' })
+		}
+		return true
+	}
+
+	checkGolangPackageNotDownload(): boolean | any {
+		const checkGoPackage = shell.exec('go version', { silent: true }).code
+		if (checkGoPackage !== 0) {
+			writeData('gocheck.txt', ['false'])
+			deleteData('gocheck.txt')
+			throw throwError({ message: 'Go runtime installed required' })
+		} else {
+			return true
 		}
 	}
 
-	checkGolangPackage(): void {
+	downloadGolangPackage(): void {
 		const checkGoPackage = shell.exec('go version', { silent: true }).code
+		console.log('downloadGolangPackage', checkGoPackage)
 		if (checkGoPackage === 0) {
 			this.progressBarDownload()
 			this.updateProgressBarDownload()
-		} else {
-			throw throwError({ message: 'Go runtime installed required' })
 		}
 	}
 
 	installedGolangPackage(): void {
-		const packages = readData()
+		const packages = readData('.gopack')
 		packages.forEach((val) => shell.exec(`go get ${val}`, { silent: true }))
 	}
 
@@ -87,8 +98,8 @@ export default class Gopack {
 					this.installedGolangPackage()
 				}, 1400)
 				setTimeout(() => {
-					cleanup()
-					deleteData()
+					clearScreen()
+					deleteData('.gopack')
 					consola.success(chalk.bold.white('Installed go package success'))
 					process.exit(0)
 				}, 1600)

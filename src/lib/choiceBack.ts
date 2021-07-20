@@ -4,11 +4,11 @@
  * MIT Licensed
  */
 
-import cleanup from 'clear'
 import notifier from 'node-notifier'
+import { clearScreen } from '../utils/clearSchreen'
 
 export default async (prompt: any, callback: any): Promise<void> => {
-	cleanup()
+	clearScreen()
 	notifier.notify(
 		{
 			title: 'Gopack CLI Notification',
@@ -20,7 +20,7 @@ export default async (prompt: any, callback: any): Promise<void> => {
 		function (error, response, metadata) {
 			if (!error) {
 				setTimeout(() => {
-					cleanup()
+					clearScreen()
 					prompt({
 						type: 'confirm',
 						name: 'confirms',
