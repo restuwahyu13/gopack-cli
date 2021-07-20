@@ -21,6 +21,8 @@ cache:
 dist: xenial
 os:
   - linux
+  - windows
+  - osx
 jobs:
   fast_finish: true
 notifications:
