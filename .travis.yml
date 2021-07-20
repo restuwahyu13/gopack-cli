@@ -9,7 +9,7 @@ addons:
     packages:
       - make
 before_install:
-  - if [ $PLATFORM_NAME == "windows" ] then choco install make fi
+  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then choco install make; fi
   - echo -e "machine github.com\n  login $GITHUB_TOKEN" > ~/.netrc
   - git lfs pull
 branches:
