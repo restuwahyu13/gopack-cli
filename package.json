@@ -41,6 +41,8 @@
 		"package downloader",
 		"golang",
 		"go",
+		"gopack",
+		"gopack-cli",
 		"command",
 		"node",
 		"nodejs",
