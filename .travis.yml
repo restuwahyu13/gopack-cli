@@ -9,7 +9,6 @@ addons:
     packages:
       - make
 before_install:
-  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then choco install make; fi
   - echo -e "machine github.com\n  login $GITHUB_TOKEN" > ~/.netrc
   - git lfs pull
 branches:
@@ -24,7 +23,6 @@ cache:
 dist: xenial
 os:
   - linux
-  - windows
 jobs:
   fast_finish: true
 notifications:
