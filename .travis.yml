@@ -1,12 +1,19 @@
 language: node_js
 node_js:
   - node
+  - 15
   - 14
+  - 12
 addons:
   apt:
     packages:
       - make
 before_install:
+  - |
+     if [ $PLATFORM_NAME == "windows" ] 
+      then
+        choco install make
+      fi
   - echo -e "machine github.com\n  login $GITHUB_TOKEN" > ~/.netrc
   - git lfs pull
 branches:
@@ -22,7 +29,6 @@ dist: xenial
 os:
   - linux
   - windows
-  - osx
 jobs:
   fast_finish: true
 notifications:
