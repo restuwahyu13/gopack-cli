@@ -1,7 +1,7 @@
 {
 	"name": "gopack-cli",
 	"version": "0.0.1",
-	"description": "Gopack instant package downloader for Go programming",
+	"description": "Gopack CLI instant package downloader for Go programming",
 	"main": "index.js",
 	"files": [
 		"/dist/**"

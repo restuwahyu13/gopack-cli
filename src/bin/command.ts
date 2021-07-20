@@ -13,8 +13,8 @@ import searchPackage from '../lib/searchPackage'
 import helpMenu from '../lib/helpMenu'
 import { detectKeyboard } from '../utils/detectKeyboard'
 import Gopack from '../'
+let gopack = new Gopack()
 ;(async function (): Promise<void> {
-	const gopack = new Gopack()
 	const checkGolangPackageNotDownload = gopack.checkGolangPackageNotDownload()
 	if (checkGolangPackageNotDownload === true) {
 		detectKeyboard()

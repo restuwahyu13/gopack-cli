@@ -46,8 +46,9 @@ export default async (prompt: any, answer: Record<string, any>, callback: any): 
 							message: 'Installed go package rejected',
 							sound: true,
 							wait: true,
-							timeout: 6
+							timeout: 7
 						})
+						process.exit(0)
 					}
 				})
 			} else {
@@ -58,8 +59,9 @@ export default async (prompt: any, answer: Record<string, any>, callback: any): 
 					message: 'Go package unavailable',
 					sound: true,
 					wait: true,
-					timeout: 6
+					timeout: 7
 				})
+				process.exit(0)
 			}
 		} else {
 			clearScreen()
@@ -68,8 +70,9 @@ export default async (prompt: any, answer: Record<string, any>, callback: any): 
 				message: 'Go package unavailable',
 				sound: true,
 				wait: true,
-				timeout: 6
+				timeout: 7
 			})
+			process.exit(0)
 		}
 	}
 }

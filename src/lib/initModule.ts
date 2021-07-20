@@ -37,8 +37,9 @@ export default (program: Record<string, any>): void => {
 							message: 'Initializing go module error',
 							sound: true,
 							wait: true,
-							timeout: 6
+							timeout: 7
 						})
+						process.exit(0)
 					}
 				})
 			})

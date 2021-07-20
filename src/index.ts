@@ -14,7 +14,7 @@ import colors from 'colors'
 import { Spinner } from 'cli-spinner'
 import { clearScreen } from './utils/clearSchreen'
 import { readData, deleteData, writeData } from './utils/fileSystem'
-import { throwError } from './utils/customError'
+import notifier from 'node-notifier'
 
 export default class Gopack {
 	increment = 0
@@ -34,7 +34,14 @@ export default class Gopack {
 		let checkGomodFile = fs.existsSync(path.resolve(process.cwd(), 'go.mod'))
 		if (!checkGomodFile) {
 			clearScreen()
-			throw throwError({ message: 'Installed go package error' })
+			notifier.notify({
+				title: 'Gopack CLI Notification',
+				message: 'Installed go package error',
+				sound: true,
+				wait: true,
+				timeout: 7
+			})
+			process.exit(0)
 		}
 		return true
 	}
@@ -42,9 +49,17 @@ export default class Gopack {
 	checkGolangPackageNotDownload(): boolean | any {
 		const checkGoPackage = shell.exec('go version', { silent: true }).code
 		if (checkGoPackage !== 0) {
+			clearScreen()
 			writeData('gocheck.txt', ['false'])
 			deleteData('gocheck.txt')
-			throw throwError({ message: 'Go runtime installed required' })
+			notifier.notify({
+				title: 'Gopack CLI Notification',
+				message: 'Go runtime installed required',
+				sound: true,
+				wait: true,
+				timeout: 7
+			})
+			process.exit(0)
 		} else {
 			return true
 		}
@@ -52,7 +67,6 @@ export default class Gopack {
 
 	downloadGolangPackage(): void {
 		const checkGoPackage = shell.exec('go version', { silent: true }).code
-		console.log('downloadGolangPackage', checkGoPackage)
 		if (checkGoPackage === 0) {
 			this.progressBarDownload()
 			this.updateProgressBarDownload()
