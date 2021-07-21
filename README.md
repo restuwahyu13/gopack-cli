@@ -25,8 +25,8 @@ $ npm install gopack-cli -g or yarn add gopack-cli -g
 
 - [x] Easy to use
 - [x] Instant initialize `go.mod`
-- [x] Support installed multiple Go module up to 50x package library at the same time and max 100
-- [x] Support installed new differen Go module, after installation Go module previous success up to more than 10x and max 15
+- [x] Support installed multiple Go module up to 50x package library at the same time and max 100 package
+- [x] Support installed new different Go module, after installation Go module previous success, up to more than 10x and max 15
 
 ## Command
 ```sh
