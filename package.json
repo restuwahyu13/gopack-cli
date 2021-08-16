@@ -75,7 +75,7 @@
 		"@types/consola": "^2.2.5",
 		"@types/figlet": "^1.5.4",
 		"@types/inquirer": "^7.3.3",
-		"@types/jest": "^26.0.20",
+		"@types/jest": "^27.0.1",
 		"@types/node": "^15.0.1",
 		"@types/node-notifier": "^8.0.1",
 		"@types/shelljs": "^0.8.9",
