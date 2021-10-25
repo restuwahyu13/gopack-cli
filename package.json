@@ -76,7 +76,7 @@
 		"@types/figlet": "^1.5.4",
 		"@types/inquirer": "^7.3.3",
 		"@types/jest": "^27.0.1",
-		"@types/node": "^15.0.1",
+		"@types/node": "^16.11.4",
 		"@types/node-notifier": "^8.0.1",
 		"@types/shelljs": "^0.8.9",
 		"@typescript-eslint/eslint-plugin": "^4.12.0",
