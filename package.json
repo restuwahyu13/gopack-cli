@@ -51,7 +51,7 @@
 		"typescript"
 	],
 	"dependencies": {
-		"axios": "^0.21.3",
+		"axios": "^0.26.0",
 		"chalk": "^4.1.1",
 		"clear": "^0.1.0",
 		"cli-progress": "^3.9.0",
